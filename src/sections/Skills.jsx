@@ -31,7 +31,7 @@ const Skills = () => {
           <motion.h2
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
-            className="text-5xl md:text-7xl font-black mb-6 text-slate-900 dark:text-white"
+            className="text-4xl md:text-7xl font-black mb-6 text-slate-900 dark:text-white"
           >
             My <span className="text-gradient">Tech Stack</span>
           </motion.h2>
@@ -52,7 +52,7 @@ const Skills = () => {
               key={i}
               variants={item}
               whileHover={{ y: -10, transition: { duration: 0.3 } }}
-              className="p-8 rounded-[2rem] glass group transition-all duration-300 border-slate-200 dark:border-[rgba(255,255,255,0.1)] hover:border-pink-500/50"
+              className="p-6 md:p-8 rounded-[1.5rem] md:rounded-[2rem] glass group transition-all duration-300 border-slate-200 dark:border-[rgba(255,255,255,0.1)] hover:border-pink-500/50"
             >
               <div className={`w-12 h-12 rounded-xl bg-slate-100 dark:bg-white/5 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform ${skill.color}`}>
                 {skill.icon}

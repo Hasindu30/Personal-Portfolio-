@@ -79,7 +79,7 @@ const Projects = () => {
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            className="text-4xl md:text-6xl font-black text-slate-900 dark:text-white"
+            className="text-3xl md:text-6xl font-black text-slate-900 dark:text-white"
           >
             Featured <span className="text-gradient">Projects</span>
           </motion.h2>

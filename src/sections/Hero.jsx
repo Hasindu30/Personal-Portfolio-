@@ -25,7 +25,7 @@ const Hero = () => {
             <Sparkles size={14} /> Available for new projects
           </motion.div>
           
-          <div className="text-5xl md:text-7xl font-extrabold leading-[1.1] tracking-tighter mb-8 min-h-[200px] md:min-h-[280px]">
+          <div className="text-3xl md:text-7xl font-extrabold leading-[1.1] tracking-tighter mb-8 min-h-[120px] md:min-h-[280px]">
             <div className="text-slate-900 dark:text-white mb-4">I'M</div>
             <div className="text-gradient">
               <Typewriter
@@ -44,7 +44,7 @@ const Hero = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5 }}
-            className="text-xl text-slate-600 dark:text-white/60 max-w-lg mb-10 leading-relaxed"
+            className="text-lg md:text-xl text-slate-600 dark:text-white/60 max-w-lg mb-10 leading-relaxed"
           >
             Crafting high-performance digital solutions with precision and passion. Specialized in modern full-stack development and user-centric design.
           </motion.p>
@@ -54,7 +54,7 @@ const Hero = () => {
               href="#contact"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="px-8 py-4 bg-slate-900 dark:bg-white text-white dark:text-black font-black rounded-2xl flex items-center gap-2 group hover:bg-pink-500 dark:hover:bg-pink-500 hover:text-white transition-all duration-300"
+              className="px-6 py-3 md:px-8 md:py-4 bg-slate-900 dark:bg-white text-white dark:text-black font-black rounded-2xl flex items-center gap-2 group hover:bg-pink-500 dark:hover:bg-pink-500 hover:text-white transition-all duration-300"
             >
               Get in Touch <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
             </motion.a>
@@ -63,21 +63,21 @@ const Hero = () => {
               href="#experience"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="px-8 py-4 bg-slate-200/50 dark:bg-white/5 border border-slate-300 dark:border-white/10 backdrop-blur-md font-bold rounded-2xl flex items-center gap-2 hover:bg-slate-300/50 dark:hover:bg-white/10 text-slate-700 dark:text-white transition-all"
+              className="px-6 py-3 md:px-8 md:py-4 bg-slate-200/50 dark:bg-white/5 border border-slate-300 dark:border-white/10 backdrop-blur-md font-bold rounded-2xl flex items-center gap-2 hover:bg-slate-300/50 dark:hover:bg-white/10 text-slate-700 dark:text-white transition-all"
             >
               View Work
             </motion.a>
           </div>
 
-          <div className="mt-16 flex items-center gap-8 pt-8 border-t border-slate-200 dark:border-white/5">
+          <div className="mt-12 md:mt-16 flex items-center gap-8 pt-8 border-t border-slate-200 dark:border-white/5">
             <div>
-              <p className="text-3xl font-black text-pink-500">6+</p>
-              <p className="text-slate-500 dark:text-white/40 text-sm uppercase tracking-wider font-bold">Months Exp</p>
+              <p className="text-2xl md:text-3xl font-black text-pink-500">6+</p>
+              <p className="text-slate-500 dark:text-white/40 text-xs md:text-sm uppercase tracking-wider font-bold">Months Exp</p>
             </div>
             <div className="w-px h-10 bg-slate-300 dark:bg-white/10" />
             <div>
-              <p className="text-3xl font-black text-indigo-500">20+</p>
-              <p className="text-slate-500 dark:text-white/40 text-sm uppercase tracking-wider font-bold">Projects Done</p>
+              <p className="text-2xl md:text-3xl font-black text-indigo-500">20+</p>
+              <p className="text-slate-500 dark:text-white/40 text-xs md:text-sm uppercase tracking-wider font-bold">Projects Done</p>
             </div>
           </div>
         </motion.div>
@@ -86,13 +86,13 @@ const Hero = () => {
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1 }}
-          className="relative"
+          className="relative order-first md:order-last mb-8 md:mb-0"
         >
-          <div className="relative z-10 w-full aspect-square rounded-[3rem] overflow-hidden glass p-4 border-slate-200 dark:border-white/10 shadow-[0_0_50px_rgba(0,0,0,0.05)] dark:shadow-[0_0_50px_rgba(255,255,255,0.05)]">
+          <div className="relative z-10 w-full aspect-square rounded-[2rem] md:rounded-[3rem] overflow-hidden glass p-4 border-slate-200 dark:border-white/10 shadow-[0_0_50px_rgba(0,0,0,0.05)] dark:shadow-[0_0_50px_rgba(255,255,255,0.05)]">
             <img 
               src="/assets/hero-visual.png" 
-              alt="Hasindu Visual" 
-              className="w-full h-full object-cover rounded-[2.5rem] dark:grayscale hover:grayscale-0 transition-all duration-700"
+              alt="Hasindu Chandeepa - Software Engineer" 
+              className="w-full h-full object-cover rounded-[1.5rem] md:rounded-[2.5rem] dark:grayscale hover:grayscale-0 transition-all duration-700"
               loading="eager"
               fetchpriority="high"
               decoding="sync"

@@ -22,41 +22,43 @@ const Contact = () => {
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[80%] h-[40%] bg-pink-500/10 blur-[150px] rounded-full -z-10" />
 
       <div className="container mx-auto px-6">
-        <div className="glass p-12 md:p-20 rounded-[3rem] text-center border-slate-200 dark:border-white/5 relative overflow-hidden">
+        <div className="glass p-8 md:p-20 rounded-[2.5rem] md:rounded-[3rem] text-center border-slate-200 dark:border-white/5 relative overflow-hidden">
           {/* Subtle grid pattern */}
           <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle, white 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
 
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             whileInView={{ opacity: 1, scale: 1 }}
-            className="w-20 h-20 bg-pink-500 rounded-3xl flex items-center justify-center mx-auto mb-10 shadow-[0_0_50px_rgba(236,72,153,0.3)]"
+            className="w-16 h-16 md:w-20 md:h-20 bg-pink-500 rounded-2xl md:rounded-3xl flex items-center justify-center mx-auto mb-8 shadow-[0_0_50px_rgba(236,72,153,0.3)]"
           >
-            <Zap size={40} className="text-white fill-white" />
+            <Zap size={32} className="text-white fill-white md:hidden" />
+            <Zap size={40} className="text-white fill-white hidden md:block" />
           </motion.div>
 
-          <h2 className="text-5xl md:text-7xl font-black mb-8 leading-tight text-slate-900 dark:text-white">
+          <h2 className="text-3xl md:text-7xl font-black mb-6 md:mb-8 leading-tight text-slate-900 dark:text-white">
             Ready to <span className="text-gradient">Upgrade</span> <br />
             your next project?
           </h2>
 
-          <p className="text-xl text-slate-500 dark:text-white/50 max-w-xl mx-auto mb-12">
+          <p className="text-lg md:text-xl text-slate-500 dark:text-white/50 max-w-xl mx-auto mb-10 md:mb-12">
             Let's build something extraordinary together. I'm currently open to new opportunities and collaborations.
           </p>
 
-          <div className="grid sm:grid-cols-2 gap-6 max-w-4xl mx-auto text-left">
+          <div className="grid sm:grid-cols-2 gap-4 md:gap-6 max-w-4xl mx-auto text-left">
             {/* Email */}
             <motion.a
               href="mailto:chandeepahasindu@gmail.com"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="p-6 bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-3xl flex items-center gap-6 hover:border-pink-500/50 transition-all group"
+              className="p-4 md:p-6 bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-2xl md:rounded-3xl flex items-center gap-4 md:gap-6 hover:border-pink-500/50 transition-all group"
             >
-              <div className="w-14 h-14 bg-pink-500/10 rounded-2xl flex items-center justify-center text-pink-500 shrink-0 group-hover:scale-110 transition-transform">
-                <Mail size={24} />
+              <div className="w-12 h-12 md:w-14 md:h-14 bg-pink-500/10 rounded-xl md:rounded-2xl flex items-center justify-center text-pink-500 shrink-0 group-hover:scale-110 transition-transform">
+                <Mail size={20} className="md:hidden" />
+                <Mail size={24} className="hidden md:block" />
               </div>
-              <div className="overflow-hidden">
-                <div className="text-sm font-bold text-slate-500 dark:text-white/50 uppercase tracking-wider mb-1">Email Me</div>
-                <div className="font-bold text-slate-900 dark:text-white truncate">chandeepahasindu@gmail.com</div>
+              <div className="overflow-hidden min-w-0">
+                <div className="text-[10px] md:text-sm font-bold text-slate-500 dark:text-white/50 uppercase tracking-wider mb-1">Email Me</div>
+                <div className="font-bold text-sm md:text-base text-slate-900 dark:text-white break-all md:truncate">chandeepahasindu@gmail.com</div>
               </div>
             </motion.a>
 
@@ -65,14 +67,15 @@ const Contact = () => {
               href="tel:0717033907"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="p-6 bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-3xl flex items-center gap-6 hover:border-indigo-500/50 transition-all group"
+              className="p-4 md:p-6 bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-2xl md:rounded-3xl flex items-center gap-4 md:gap-6 hover:border-indigo-500/50 transition-all group"
             >
-              <div className="w-14 h-14 bg-indigo-500/10 rounded-2xl flex items-center justify-center text-indigo-500 shrink-0 group-hover:scale-110 transition-transform">
-                <Phone size={24} />
+              <div className="w-12 h-12 md:w-14 md:h-14 bg-indigo-500/10 rounded-xl md:rounded-2xl flex items-center justify-center text-indigo-500 shrink-0 group-hover:scale-110 transition-transform">
+                <Phone size={20} className="md:hidden" />
+                <Phone size={24} className="hidden md:block" />
               </div>
-              <div className="overflow-hidden">
-                <div className="text-sm font-bold text-slate-500 dark:text-white/50 uppercase tracking-wider mb-1">Call Me</div>
-                <div className="font-bold text-slate-900 dark:text-white truncate">0717033907</div>
+              <div className="overflow-hidden min-w-0">
+                <div className="text-[10px] md:text-sm font-bold text-slate-500 dark:text-white/50 uppercase tracking-wider mb-1">Call Me</div>
+                <div className="font-bold text-sm md:text-base text-slate-900 dark:text-white break-all md:truncate">0717033907</div>
               </div>
             </motion.a>
 
@@ -83,14 +86,15 @@ const Contact = () => {
               rel="noopener noreferrer"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="p-6 bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-3xl flex items-center gap-6 hover:border-blue-500/50 transition-all group"
+              className="p-4 md:p-6 bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-2xl md:rounded-3xl flex items-center gap-4 md:gap-6 hover:border-blue-500/50 transition-all group"
             >
-              <div className="w-14 h-14 bg-blue-500/10 rounded-2xl flex items-center justify-center text-blue-500 shrink-0 group-hover:scale-110 transition-transform">
-                <LinkedinIcon size={24} />
+              <div className="w-12 h-12 md:w-14 md:h-14 bg-blue-500/10 rounded-xl md:rounded-2xl flex items-center justify-center text-blue-500 shrink-0 group-hover:scale-110 transition-transform">
+                <LinkedinIcon size={20} className="md:hidden" />
+                <LinkedinIcon size={24} className="hidden md:block" />
               </div>
-              <div className="overflow-hidden">
-                <div className="text-sm font-bold text-slate-500 dark:text-white/50 uppercase tracking-wider mb-1">LinkedIn</div>
-                <div className="font-bold text-slate-900 dark:text-white truncate">hasindu-chandeepa</div>
+              <div className="overflow-hidden min-w-0">
+                <div className="text-[10px] md:text-sm font-bold text-slate-500 dark:text-white/50 uppercase tracking-wider mb-1">LinkedIn</div>
+                <div className="font-bold text-sm md:text-base text-slate-900 dark:text-white break-all md:truncate">hasindu-chandeepa</div>
               </div>
             </motion.a>
 
@@ -101,14 +105,15 @@ const Contact = () => {
               rel="noopener noreferrer"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="p-6 bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-3xl flex items-center gap-6 hover:border-slate-800 dark:hover:border-white/50 transition-all group"
+              className="p-4 md:p-6 bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-2xl md:rounded-3xl flex items-center gap-4 md:gap-6 hover:border-slate-800 dark:hover:border-white/50 transition-all group"
             >
-              <div className="w-14 h-14 bg-slate-300 dark:bg-white/10 rounded-2xl flex items-center justify-center text-slate-700 dark:text-white shrink-0 group-hover:scale-110 transition-transform">
-                <GithubIcon size={24} />
+              <div className="w-12 h-12 md:w-14 md:h-14 bg-slate-300 dark:bg-white/10 rounded-xl md:rounded-2xl flex items-center justify-center text-slate-700 dark:text-white shrink-0 group-hover:scale-110 transition-transform">
+                <GithubIcon size={20} className="md:hidden" />
+                <GithubIcon size={24} className="hidden md:block" />
               </div>
-              <div className="overflow-hidden">
-                <div className="text-sm font-bold text-slate-500 dark:text-white/50 uppercase tracking-wider mb-1">GitHub</div>
-                <div className="font-bold text-slate-900 dark:text-white truncate">Hasindu30</div>
+              <div className="overflow-hidden min-w-0">
+                <div className="text-[10px] md:text-sm font-bold text-slate-500 dark:text-white/50 uppercase tracking-wider mb-1">GitHub</div>
+                <div className="font-bold text-sm md:text-base text-slate-900 dark:text-white break-all md:truncate">Hasindu30</div>
               </div>
             </motion.a>
           </div>

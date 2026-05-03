@@ -1,8 +1,7 @@
 import { motion } from 'framer-motion';
 import { ExternalLink, Code, Layers } from 'lucide-react';
 
-const Projects = () => {
-  const projects = [
+const projects = [
     {
       title: "POS Inventory System",
       category: "Desktop & Web Application",
@@ -57,8 +56,9 @@ const Projects = () => {
       github: "#",
       demo: "#"
     }
-  ];
+];
 
+const Projects = () => {
   return (
     <section id="projects" className="py-32 relative overflow-hidden">
       <div className="container mx-auto px-6">
@@ -94,6 +94,8 @@ const Projects = () => {
                   src={project.image} 
                   alt={project.title} 
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                  loading="lazy"
+                  decoding="async"
                 />
               </div>
               

@@ -93,6 +93,9 @@ const Hero = () => {
               src="/assets/hero-visual.png" 
               alt="Hasindu Visual" 
               className="w-full h-full object-cover rounded-[2.5rem] dark:grayscale hover:grayscale-0 transition-all duration-700"
+              loading="eager"
+              fetchpriority="high"
+              decoding="sync"
             />
           </div>
         </motion.div>

@@ -63,3 +63,27 @@
 html {
   scroll-behavior: smooth;
 }
+
+/* Tech Ticker Animations */
+@keyframes ticker-ltr {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-25%); }
+}
+
+@keyframes ticker-rtl {
+  0%   { transform: translateX(-25%); }
+  100% { transform: translateX(0); }
+}
+
+.ticker-ltr {
+  animation: ticker-ltr 40s linear infinite;
+}
+
+.ticker-rtl {
+  animation: ticker-rtl 40s linear infinite;
+}
+
+.ticker-ltr:hover,
+.ticker-rtl:hover {
+  animation-play-state: paused;
+}

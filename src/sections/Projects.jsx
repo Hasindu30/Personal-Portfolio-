@@ -1,5 +1,11 @@
 import { motion } from 'framer-motion';
-import { ExternalLink, Code, Layers } from 'lucide-react';
+import { ExternalLink, Layers } from 'lucide-react';
+
+const GithubIcon = () => (
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.604-3.369-1.34-3.369-1.34-.454-1.154-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836a9.59 9.59 0 012.504.337c1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.202 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z"/>
+  </svg>
+);
 
 const projects = [
     {
@@ -17,7 +23,7 @@ const projects = [
       description: "A professional business portfolio website built for an Australian Media Wall client. Designed with a stunning UI, fully SEO-optimized for top Google rankings, and deployed live. Features a responsive layout, service showcases, and a sleek gallery of completed installations.",
       image: "/assets/hasindu2.jpeg",
       tech: ["React", "Tailwind CSS", "SEO", "Vite"],
-      github: "#",
+      github: null,
       demo: "https://mediawallsolution.com.au"
     },
     {
@@ -26,7 +32,7 @@ const projects = [
       description: "A cross-platform mobile app for stores and individuals to track daily expenses and income effortlessly. Features smart alert & push notifications, real-time balance summaries, category-based spending insights, and a Node.js/Express backend. Built with Expo & React Native, fully tested and deployed to the Expo store.",
       image: "/assets/budgetapp.jpeg",
       tech: ["Expo", "React Native", "Node.js", "Express"],
-      github: "#",
+      github: "https://github.com/Hasindu30/budget-app-backend-",
       demo: "#"
     },
     {
@@ -35,7 +41,7 @@ const projects = [
       description: "A high-performance portfolio and company website built for Redora Tech — a software development company. Crafted with React & Tailwind CSS, deployed on Vercel with a custom domain, and fully SEO-optimized for top search engine rankings. Features a sleek, modern UI with smooth animations and best-in-class performance scores.",
       image: "/assets/redora.jpeg",
       tech: ["React", "Tailwind CSS", "Vercel", "SEO"],
-      github: "#",
+      github: null,
       demo: "https://www.redoratech.online"
     },
     {
@@ -44,8 +50,8 @@ const projects = [
       description: "Vibify is a MERN-based music app that lets users add, play, and organize songs into playlists, offering a seamless, personalized music experience across devices. Features a modern player UI, playlist management, and a powerful REST API backend.",
       image: "/assets/Portfolio.png",
       tech: ["React", "MongoDB", "Node.js", "Express"],
-      github: "#",
-      demo: "#"
+      github: "https://github.com/Hasindu30/Vibify",
+      demo: null
     },
     {
       title: "ProChat — Real-Time Chat App",
@@ -53,8 +59,8 @@ const projects = [
       description: "ProChat is a full-featured real-time chat application built on the MERN stack with Socket.io. Supports instant one-on-one and group messaging, online presence indicators, typing notifications, message history, and secure JWT authentication — delivering a fast, reliable chat experience across all devices.",
       image: "/assets/Prochat.png",
       tech: ["React", "MongoDB", "Node.js", "Socket.io"],
-      github: "#",
-      demo: "#"
+      github: "https://github.com/Hasindu30/ProChat-App",
+      demo: null
     }
 ];
 
@@ -103,8 +109,12 @@ const Projects = () => {
                 <div className="flex items-center justify-between mb-4">
                   <span className="text-pink-500 text-xs font-bold uppercase tracking-wider">{project.category}</span>
                   <div className="flex gap-3">
-                    <a href={project.github} className="text-slate-400 dark:text-white/40 hover:text-slate-900 dark:hover:text-white transition-colors"><Code size={18} /></a>
-                    <a href={project.demo} className="text-slate-400 dark:text-white/40 hover:text-slate-900 dark:hover:text-white transition-colors"><ExternalLink size={18} /></a>
+                    {project.github && (
+                      <a href={project.github} className="text-slate-400 dark:text-white/40 hover:text-slate-900 dark:hover:text-white transition-colors"><GithubIcon /></a>
+                    )}
+                    {project.demo && (
+                      <a href={project.demo} target="_blank" rel="noopener noreferrer" className="text-slate-400 dark:text-white/40 hover:text-slate-900 dark:hover:text-white transition-colors"><ExternalLink size={18} /></a>
+                    )}
                   </div>
                 </div>
                 

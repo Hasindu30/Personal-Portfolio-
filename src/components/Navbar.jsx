@@ -2,11 +2,13 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, Sun, Moon } from 'lucide-react';
 import { cn } from '../lib/utils';
+import { Link, useLocation } from 'react-router-dom';
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [theme, setTheme] = useState(localStorage.getItem('theme') || 'dark');
+  const location = useLocation();
 
   useEffect(() => {
     if (theme === 'dark') {
@@ -26,12 +28,27 @@ const Navbar = () => {
   }, []);
 
   const navLinks = [
-    { name: 'Home', href: '#home' },
-    { name: 'Experience', href: '#experience' },
-    { name: 'Projects', href: '#projects' },
-    { name: 'Skills', href: '#skills' },
-    { name: 'Contact', href: '#contact' },
+    { name: 'Home', href: '/#home' },
+    { name: 'Experience', href: '/#experience' },
+    { name: 'Projects', href: '/#projects' },
+    { name: 'Skills', href: '/#skills' },
+    { name: 'Contact', href: '/#contact' },
   ];
+
+  // Helper to handle smooth scroll to hash links
+  const handleLinkClick = (e, href) => {
+    if (href.startsWith('/#')) {
+      const id = href.split('#')[1];
+      if (location.pathname === '/') {
+        e.preventDefault();
+        const element = document.getElementById(id);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
+    }
+    setIsOpen(false);
+  };
 
   const ThemeToggle = () => (
     <button
@@ -69,28 +86,35 @@ const Navbar = () => {
       )}
     >
       <div className="container mx-auto px-6 flex items-center justify-between">
-        <motion.a
-          href="#home"
+        <motion.div
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
-          className="text-2xl font-black tracking-tighter text-slate-900 dark:text-white"
         >
-          HASINDU<span className="text-pink-500">.</span>
-        </motion.a>
+          <Link
+            to="/"
+            className="text-2xl font-black tracking-tighter text-slate-900 dark:text-white"
+          >
+            HASINDU<span className="text-pink-500">.</span>
+          </Link>
+        </motion.div>
 
         {/* Desktop Nav */}
         <div className="hidden md:flex items-center gap-8">
           {navLinks.map((link, i) => (
-            <motion.a
+            <motion.div
               key={link.name}
-              href={link.href}
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.1 }}
-              className="text-sm font-medium text-slate-600 dark:text-white/70 hover:text-pink-500 dark:hover:text-white transition-colors"
             >
-              {link.name}
-            </motion.a>
+              <Link
+                to={link.href}
+                onClick={(e) => handleLinkClick(e, link.href)}
+                className="text-sm font-medium text-slate-600 dark:text-white/70 hover:text-pink-500 dark:hover:text-white transition-colors"
+              >
+                {link.name}
+              </Link>
+            </motion.div>
           ))}
           {/* Theme Toggle Switch */}
           <div className="flex items-center ml-4 pl-4 border-l border-slate-200 dark:border-white/10">
@@ -121,14 +145,14 @@ const Navbar = () => {
           >
             <div className="flex flex-col p-6 gap-4">
               {navLinks.map((link) => (
-                <a
+                <Link
                   key={link.name}
-                  href={link.href}
-                  onClick={() => setIsOpen(false)}
+                  to={link.href}
+                  onClick={(e) => handleLinkClick(e, link.href)}
                   className="text-lg font-semibold text-slate-600 dark:text-white/80 hover:text-pink-500 dark:hover:text-white transition-colors"
                 >
                   {link.name}
-                </a>
+                </Link>
               ))}
             </div>
           </motion.div>
@@ -139,3 +163,4 @@ const Navbar = () => {
 };
 
 export default Navbar;
+

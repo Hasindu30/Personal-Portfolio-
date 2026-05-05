@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { ExternalLink, Layers } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const GithubIcon = () => (
   <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
@@ -15,7 +16,8 @@ const projects = [
       image: "/assets/hasindu.jpeg",
       tech: ["React", "Electron", "Node.js", "Tailwind CSS"],
       github: "#",
-      demo: "#"
+      demo: "/pos-system",
+      isInternal: true
     },
     {
       title: "Media Wall Business Website",
@@ -33,8 +35,10 @@ const projects = [
       image: "/assets/budgetapp.jpeg",
       tech: ["Expo", "React Native", "Node.js", "Express"],
       github: "https://github.com/Hasindu30/budget-app-backend-",
-      demo: "#"
+      demo: "/budget-app",
+      isInternal: true
     },
+
     {
       title: "Redora Tech Portfolio Website",
       category: "Software Company Website",
@@ -113,7 +117,15 @@ const Projects = () => {
                       <a href={project.github} className="text-slate-400 dark:text-white/40 hover:text-slate-900 dark:hover:text-white transition-colors"><GithubIcon /></a>
                     )}
                     {project.demo && (
-                      <a href={project.demo} target="_blank" rel="noopener noreferrer" className="text-slate-400 dark:text-white/40 hover:text-slate-900 dark:hover:text-white transition-colors"><ExternalLink size={18} /></a>
+                      project.isInternal ? (
+                        <Link to={project.demo} className="text-slate-400 dark:text-white/40 hover:text-slate-900 dark:hover:text-white transition-colors">
+                          <ExternalLink size={18} />
+                        </Link>
+                      ) : (
+                        <a href={project.demo} target="_blank" rel="noopener noreferrer" className="text-slate-400 dark:text-white/40 hover:text-slate-900 dark:hover:text-white transition-colors">
+                          <ExternalLink size={18} />
+                        </a>
+                      )
                     )}
                   </div>
                 </div>
@@ -140,4 +152,5 @@ const Projects = () => {
 };
 
 export default Projects;
+
 

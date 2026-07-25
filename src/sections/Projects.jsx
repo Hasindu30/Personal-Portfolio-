@@ -10,9 +10,39 @@ const GithubIcon = () => (
 
 const projects = [
     {
-      title: "POS Inventory System",
-      category: "Desktop & Web Application",
-      description: "A robust and fully customizable POS & Inventory Management system. Features real-time stock tracking, integrated bill printing, and seamless offline/online operations. Built with React and Electron for a native desktop experience.",
+      title: "RoadMate — AI Driver Assistant",
+      category: "AI-Powered Full-Stack Platform",
+      description: "An intelligent all-in-one driver assistance platform powered by an AI Co-Pilot agent. Instantly discover nearby fuel stations, parking areas, restaurants, and roadside services through location-aware search. Features natural-language AI interaction, Leaflet.js interactive maps, real-time GPS, and secure JWT-authenticated APIs for a seamless driving experience.",
+      image: "/assets/roadmate.png",
+      tech: ["React.js", "Node.js", "MongoDB", "AI Agent", "Leaflet.js", "TypeScript"],
+      github: "https://github.com/Hasindu30/Roadmate-frontend",
+      demo: "/roadmate",
+      isInternal: true
+    },
+    {
+      title: "DisasterGuard AI — Risk Prediction",
+      category: "AI Disaster Intelligence Platform",
+      description: "An AI-powered disaster management command center that analyzes real-time environmental conditions — rainfall, wind speed, flood history & elevation — to predict disaster risks, visualize high-risk zones on interactive maps, generate severity-graded emergency alerts, and manage location-based emergency resources.",
+      image: "/assets/disasterguard.png",
+      tech: ["React.js", "Node.js", "TypeScript", "Leaflet.js", "Open-Meteo API", "MongoDB"],
+      github: "https://github.com/Hasindu30/disasterguard-ai-frontend",
+      demo: "/disasterguard",
+      isInternal: true
+    },
+    {
+      title: "Task Management System",
+      category: "Full-Stack Web Application",
+      description: "A production-grade task management platform with a real-time analytics dashboard, full CRUD operations, priority tracking (High / Medium / Low), status management, and advanced search & filter. Built end-to-end with React, TypeScript, Express, and PostgreSQL via Prisma ORM — secured with JWT and bcrypt authentication.",
+      image: "/assets/taskmanager.png",
+      tech: ["React", "TypeScript", "Node.js", "PostgreSQL", "Prisma ORM", "JWT"],
+      github: null,
+      demo: "/task-manager",
+      isInternal: true
+    },
+    {
+      title: "POS & Inventory System",
+      category: "Desktop Application",
+      description: "A production-ready Point of Sale & Inventory Management system designed for modern retail businesses. Delivers real-time stock tracking with low-stock alerts, seamless offline/online operation with auto-sync, integrated thermal bill printing, and role-based secure access — all wrapped in a fast native desktop experience powered by React and Electron.",
       image: "/assets/hasindu.jpeg",
       tech: ["React", "Electron", "Node.js", "Tailwind CSS"],
       github: "#",
@@ -22,7 +52,7 @@ const projects = [
     {
       title: "Media Wall Business Website",
       category: "Client Project — Australia",
-      description: "A professional business portfolio website built for an Australian Media Wall client. Designed with a stunning UI, fully SEO-optimized for top Google rankings, and deployed live. Features a responsive layout, service showcases, and a sleek gallery of completed installations.",
+      description: "A premium business website delivered for an Australian Media Wall installation company. Built with pixel-perfect UI design, full mobile responsiveness, and deep on-page SEO optimization to achieve top Google rankings. Showcases services, a visual installation gallery, and client testimonials — live and generating real business leads.",
       image: "/assets/hasindu2.jpeg",
       tech: ["React", "Tailwind CSS", "SEO", "Vite"],
       github: null,
@@ -31,27 +61,26 @@ const projects = [
     {
       title: "Budget Tracker Mobile App",
       category: "Mobile Application",
-      description: "A cross-platform mobile app for stores and individuals to track daily expenses and income effortlessly. Features smart alert & push notifications, real-time balance summaries, category-based spending insights, and a Node.js/Express backend. Built with Expo & React Native, fully tested and deployed to the Expo store.",
+      description: "A cross-platform expense tracking app for stores and individuals to manage daily finances with ease. Features smart push notifications, real-time balance dashboards, category-based spending analytics, and a Node.js/Express backend with secure data sync. Published and live on the Expo store for Android and iOS.",
       image: "/assets/budgetapp.jpeg",
       tech: ["Expo", "React Native", "Node.js", "Express"],
       github: "https://github.com/Hasindu30/budget-app-backend-",
       demo: "/budget-app",
       isInternal: true
     },
-
     {
-      title: "Redora Tech Portfolio Website",
+      title: "Redora Tech — Company Website",
       category: "Software Company Website",
-      description: "A high-performance portfolio and company website built for Redora Tech — a software development company. Crafted with React & Tailwind CSS, deployed on Vercel with a custom domain, and fully SEO-optimized for top search engine rankings. Features a sleek, modern UI with smooth animations and best-in-class performance scores.",
+      description: "A high-performance portfolio and corporate website built for Redora Tech, a software development company. Engineered with React and Tailwind CSS, deployed to Vercel with a custom domain, and SEO-tuned to rank at the top of search results. Showcases services, case studies, and team culture with a sleek, animated, premium UI.",
       image: "/assets/redora.jpeg",
       tech: ["React", "Tailwind CSS", "Vercel", "SEO"],
       github: null,
       demo: "https://www.redoratech.online"
     },
     {
-      title: "Vibify Music Web App",
-      category: "Music & Entertainment",
-      description: "Vibify is a MERN-based music app that lets users add, play, and organize songs into playlists, offering a seamless, personalized music experience across devices. Features a modern player UI, playlist management, and a powerful REST API backend.",
+      title: "Vibify — Music Streaming App",
+      category: "MERN Stack Web Application",
+      description: "A full-stack music streaming application where users can upload, play, and organize songs into personal playlists. Built on the MERN stack with a custom audio player UI, drag-and-drop playlist management, and a powerful REST API backend — delivering a Spotify-inspired experience from scratch.",
       image: "/assets/Portfolio.png",
       tech: ["React", "MongoDB", "Node.js", "Express"],
       github: "https://github.com/Hasindu30/Vibify",
@@ -60,7 +89,7 @@ const projects = [
     {
       title: "ProChat — Real-Time Chat App",
       category: "Real-Time Communication",
-      description: "ProChat is a full-featured real-time chat application built on the MERN stack with Socket.io. Supports instant one-on-one and group messaging, online presence indicators, typing notifications, message history, and secure JWT authentication — delivering a fast, reliable chat experience across all devices.",
+      description: "A full-featured real-time messaging application built with the MERN stack and Socket.io. Supports instant one-on-one and group chats, live online presence indicators, typing notifications, persistent message history, and secure JWT-based authentication — delivering a lightning-fast, WhatsApp-like chat experience across all devices.",
       image: "/assets/Prochat.png",
       tech: ["React", "MongoDB", "Node.js", "Socket.io"],
       github: "https://github.com/Hasindu30/ProChat-App",

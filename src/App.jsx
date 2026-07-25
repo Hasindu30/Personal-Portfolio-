@@ -11,6 +11,9 @@ import TechTicker from './components/TechTicker';
 import Contact from './sections/Contact';
 import PosSystem from './pages/PosSystem';
 import BudgetApp from './pages/BudgetApp';
+import RoadMate from './pages/RoadMate';
+import DisasterGuard from './pages/DisasterGuard';
+import TaskManager from './pages/TaskManager';
 
 // Scroll to top component to handle navigation
 const ScrollToTop = () => {
@@ -45,6 +48,9 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/pos-system" element={<PosSystem />} />
             <Route path="/budget-app" element={<BudgetApp />} />
+            <Route path="/roadmate" element={<RoadMate />} />
+            <Route path="/disasterguard" element={<DisasterGuard />} />
+            <Route path="/task-manager" element={<TaskManager />} />
           </Routes>
         </main>
       </div>

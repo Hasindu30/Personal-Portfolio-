@@ -4,6 +4,29 @@ import { Briefcase, Calendar, MapPin } from 'lucide-react';
 const Experience = () => {
   const experiences = [
     {
+      company: 'Era Biz Solutions (Pvt) Ltd',
+      role: 'Trainee Full Stack Software Engineer',
+      period: 'August 2026 – Present',
+      location: 'Kottawa, Sri Lanka (On-site)',
+      description: (
+        <div className="space-y-4 text-base md:text-lg">
+          <p>
+            Working on the design, development, and maintenance of real-world enterprise software solutions, including ERP, inventory management, customer relationship management (CRM), and project management systems. Gaining hands-on experience across frontend and backend development, database integration, and scalable business application development using modern technologies.
+          </p>
+          <div>
+            <ul className="list-disc list-inside space-y-1 ml-2">
+              <li>Develop and maintain full-stack enterprise applications using Next.js, React, FastAPI, and relational databases.</li>
+              <li>Build and enhance ERP and inventory management systems to support real-world business operations.</li>
+              <li>Develop CRM and project management solutions to streamline customer interactions, business workflows, and task management.</li>
+              <li>Design and integrate RESTful APIs, implement backend business logic, and manage data using PostgreSQL and MySQL.</li>
+              <li>Collaborate on end-to-end software development, including responsive user interfaces, backend services, database operations, and application improvements.</li>
+            </ul>
+          </div>
+        </div>
+      ),
+      skills: ['Next.js', 'React', 'FastAPI', 'Python', 'PostgreSQL', 'MySQL', 'REST APIs', 'ERP Systems', 'CRM', 'Inventory Management']
+    },
+    {
       company: 'Prologics IT Solutions Pvt Ltd',
       role: 'Software Engineer Intern',
       period: '6 Months (Completed)',

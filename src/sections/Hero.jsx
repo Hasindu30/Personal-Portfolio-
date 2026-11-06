@@ -1,14 +1,21 @@
 import { motion } from 'framer-motion';
 import { ArrowRight, Sparkles } from 'lucide-react';
 import Typewriter from 'typewriter-effect';
+import HumanoidRobot from '../components/HumanoidRobot';
 
 const Hero = () => {
   return (
     <section id="home" className="relative min-h-screen flex items-center pt-20 overflow-hidden">
       {/* Background Gradients */}
+      {/* Dark Mode: Mesh & Ambient Color Blobs */}
       <div className="absolute top-0 left-0 w-full h-full -z-10 bg-mesh opacity-50 hidden dark:block" />
       <div className="absolute -top-[10%] -right-[10%] w-[50%] h-[50%] bg-pink-500/20 blur-[120px] rounded-full -z-10 animate-pulse hidden dark:block" />
       <div className="absolute top-[20%] -left-[10%] w-[40%] h-[40%] bg-indigo-500/20 blur-[120px] rounded-full -z-10 hidden dark:block" />
+
+      {/* Light Mode: Subtle Premium Off-White / Light-Grey Ambient Gradient */}
+      <div className="absolute inset-0 -z-10 bg-gradient-to-br from-[#F5F7FB] via-[#EEF2F7] to-[#F3F0F8] dark:hidden" />
+      <div className="absolute top-0 right-0 w-[55%] h-[65%] bg-gradient-to-bl from-indigo-100/35 via-purple-50/25 to-transparent blur-3xl -z-10 pointer-events-none dark:hidden" />
+      <div className="absolute bottom-0 left-0 w-[40%] h-[40%] bg-gradient-to-tr from-slate-200/40 to-transparent blur-2xl -z-10 pointer-events-none dark:hidden" />
 
       <div className="container mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
         <motion.div
@@ -83,21 +90,12 @@ const Hero = () => {
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
+          initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1 }}
-          className="relative order-first md:order-last mb-8 md:mb-0"
+          transition={{ duration: 1, ease: "easeOut" }}
+          className="relative order-first md:order-last mb-6 md:mb-0 w-full flex items-center justify-center overflow-visible md:-translate-y-10 lg:-translate-y-12 scale-[1.03] md:scale-[1.12] lg:scale-[1.14] origin-center"
         >
-          <div className="relative z-10 w-full aspect-square rounded-[2rem] md:rounded-[3rem] overflow-hidden glass p-4 border-slate-200 dark:border-white/10 shadow-[0_0_50px_rgba(0,0,0,0.05)] dark:shadow-[0_0_50px_rgba(255,255,255,0.05)]">
-            <img 
-              src="/assets/hero-visual.png" 
-              alt="Hasindu Chandeepa - Software Engineer" 
-              className="w-full h-full object-cover rounded-[1.5rem] md:rounded-[2.5rem] dark:grayscale hover:grayscale-0 transition-all duration-700"
-              loading="eager"
-              fetchpriority="high"
-              decoding="sync"
-            />
-          </div>
+          <HumanoidRobot />
         </motion.div>
       </div>
     </section>

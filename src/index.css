@@ -26,6 +26,10 @@
 }
 
 @layer utilities {
+  #home canvas {
+    cursor: default !important;
+  }
+
   .glass {
     @apply bg-white/50 dark:bg-[var(--card-bg)] backdrop-blur-xl border border-slate-200 dark:border-[var(--card-border)];
   }

@@ -90,30 +90,72 @@ const HumanoidRobot = ({ className = '' }) => {
           updatePixelRatio();
           window.addEventListener('resize', updatePixelRatio);
 
-          // Fine-tune head rotation range, responsiveness, and return to neutral on leave
+          // Fine-tune head rotation range, responsiveness, and torso stabilization
           try {
             const lookAtHandler = app._eventManager?.handlers?.LookAt;
             if (lookAtHandler?.events) {
               for (const ev of lookAtHandler.events) {
                 if (ev.object?.name === 'Head') {
-                  // Decreasing distance from 300 to 220 increases horizontal rotation by ~35% and vertical by ~25%
-                  ev.data.distance = 220;
-                  // Improve tracking responsiveness while preserving smooth mechanical easing
-                  ev.data.dampingFactor = 7.5;
-                  // Enable smooth return to neutral orientation when cursor leaves
+                  // Decreased distance to 185 expands horizontal head rotation by ~45-55% and vertical by ~30-35%
+                  ev.data.distance = 185;
+                  // Snappy tracking responsiveness with smooth mechanical easing
+                  ev.data.dampingFactor = 6.8;
+                  // Smooth return to neutral orientation when cursor leaves
                   ev.data.resetOnPointerLeave = true;
                   ev.data.resetSpeed = 16;
+                  ev.resetDampingFactor = 80 / 16 + 1; // 6
                 }
                 if (ev.object?.name === 'Top part') {
-                  ev.data.distance = 780;
+                  // Stabilize torso so head leads the gaze across the hero without unnatural full-body rotation
+                  ev.data.distance = 1800;
                   ev.data.dampingFactor = 36;
                   ev.data.resetOnPointerLeave = true;
                   ev.data.resetSpeed = 16;
+                  ev.resetDampingFactor = 6;
                 }
               }
             }
           } catch (tuneErr) {
             console.warn('[HumanoidRobot] LookAt fine-tuning notice:', tuneErr);
+          }
+
+          // Unify coordinate mapping across the entire Hero section
+          try {
+            const ec = app._eventManager?.eventContext;
+            const heroEl = containerRef.current?.closest('#home') || document.getElementById('home');
+            if (ec && heroEl) {
+              const origUpdateRaycaster = ec.updateRaycaster;
+              ec.updateRaycaster = function(t) {
+                const pageX = t.touches?.length > 0 ? t.touches[0].pageX : (t.pageX ?? t.clientX);
+                const pageY = t.touches?.length > 0 ? t.touches[0].pageY : (t.pageY ?? t.clientY);
+
+                const heroRect = heroEl ? heroEl.getBoundingClientRect() : null;
+                if (heroRect && heroRect.width > 0 && heroRect.height > 0 && pageX != null && pageY != null) {
+                  // Normalized position across hero section (0.0 to 1.0)
+                  const u = (pageX - (heroRect.left + window.scrollX)) / heroRect.width;
+                  const v = (pageY - (heroRect.top + window.scrollY)) / heroRect.height;
+
+                  // Scale horizontal: robot center around u ≈ 0.72 on desktop
+                  // Safe biomechanical limits [-1.35, 1.0] to prevent broken neck rotation
+                  const rawNdcX = (u - 0.72) * 2.4;
+                  const ndcX = Math.max(-1.35, Math.min(1.0, rawNdcX));
+
+                  // Scale vertical: subtle vertical glance [-0.45, 0.35]
+                  const rawNdcY = -(v - 0.42) * 0.9;
+                  const ndcY = Math.max(-0.45, Math.min(0.35, rawNdcY));
+
+                  this.pointerWorld = { x: ndcX, y: ndcY };
+                  this.pointerScreen = { x: u, y: 1 - v };
+                  if (typeof this.raycaster?.setFromCamera === 'function') {
+                    this.raycaster.setFromCamera(this.pointerWorld, this.getCamera());
+                  }
+                } else if (origUpdateRaycaster) {
+                  origUpdateRaycaster.call(this, t);
+                }
+              };
+            }
+          } catch (mapErr) {
+            console.warn('[HumanoidRobot] Hero coordinate mapping notice:', mapErr);
           }
 
           setIsLoading(false);
@@ -154,13 +196,63 @@ const HumanoidRobot = ({ className = '' }) => {
       visibilityObserver.observe(containerRef.current);
     }
 
-    // Mouse leave handler to smoothly return head to neutral pose
-    const handleMouseLeave = () => {
+    // Hero Section wide mouse tracking system
+    const heroElement = containerRef.current?.closest('#home') || document.getElementById('home');
+    let rafId = null;
+    let pendingPos = null;
+
+    const processPointer = () => {
+      rafId = null;
+      if (!pendingPos || !appRef.current) return;
+
+      const app = appRef.current;
+      const lookAtHandler = app._eventManager?.handlers?.LookAt;
+      const ec = app._eventManager?.eventContext;
+      if (!lookAtHandler || !ec) return;
+
+      ec.updateRaycaster(pendingPos);
+
+      if (lookAtHandler.events) {
+        for (const ev of lookAtHandler.events) {
+          ev.isReset = false;
+          ev.currentDampingFactor = ev.data?.dampingFactor || 6.8;
+          ev.paused = false;
+          if (typeof lookAtHandler.updateSingleEvent === 'function') {
+            lookAtHandler.updateSingleEvent(ev);
+          }
+        }
+      }
+    };
+
+    const handleHeroPointerMove = (e) => {
+      // Ignore coarse touch devices to preserve buttery native scroll and natural idle sway
+      if (e.pointerType && e.pointerType !== 'mouse') return;
+      pendingPos = {
+        clientX: e.clientX,
+        clientY: e.clientY,
+        pageX: e.pageX,
+        pageY: e.pageY,
+      };
+      if (!rafId) {
+        rafId = requestAnimationFrame(processPointer);
+      }
+    };
+
+    // Smooth return to neutral pose when cursor leaves the Hero Section
+    const handleHeroPointerLeave = () => {
+      if (rafId) {
+        cancelAnimationFrame(rafId);
+        rafId = null;
+      }
+      pendingPos = null;
+
       try {
         const lookAtHandler = appRef.current?._eventManager?.handlers?.LookAt;
         if (lookAtHandler?.events) {
           for (const ev of lookAtHandler.events) {
             ev.isReset = true;
+            ev.currentDampingFactor = ev.resetDampingFactor || 6;
+            ev.paused = false;
             if (typeof lookAtHandler.updateSingleEvent === 'function') {
               lookAtHandler.updateSingleEvent(ev);
             }
@@ -171,22 +263,26 @@ const HumanoidRobot = ({ className = '' }) => {
       }
     };
 
-    const canvasEl = canvasRef.current;
-    if (canvasEl) {
-      canvasEl.addEventListener('mouseleave', handleMouseLeave);
+    if (heroElement) {
+      heroElement.addEventListener('pointermove', handleHeroPointerMove, { passive: true });
+      heroElement.addEventListener('pointerleave', handleHeroPointerLeave);
     }
 
     // Cleanup WebGL buffers, contexts and event listeners on unmount
     return () => {
       isMounted = false;
+      if (heroElement) {
+        heroElement.removeEventListener('pointermove', handleHeroPointerMove);
+        heroElement.removeEventListener('pointerleave', handleHeroPointerLeave);
+      }
+      if (rafId) {
+        cancelAnimationFrame(rafId);
+      }
       if (visibilityObserver) {
         visibilityObserver.disconnect();
       }
       if (updatePixelRatio) {
         window.removeEventListener('resize', updatePixelRatio);
-      }
-      if (canvasEl) {
-        canvasEl.removeEventListener('mouseleave', handleMouseLeave);
       }
       try {
         if (appRef.current) {

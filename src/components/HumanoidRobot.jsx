@@ -50,11 +50,14 @@ const HumanoidRobot = ({ className = '' }) => {
 
     const app = new Application(canvas, {
       renderMode: prefersReducedMotion ? 'manual' : 'auto',
+      renderer: 'webgl',
     });
     appRef.current = app;
 
     const sceneLocalUrl = '/assets/robot.splinecode';
     const sceneCdnUrl = 'https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode';
+
+    let updatePixelRatio = null;
 
     const loadScene = async () => {
       try {
@@ -71,6 +74,21 @@ const HumanoidRobot = ({ className = '' }) => {
 
         if (isMounted) {
           window.__splineApp = app;
+
+          // Clamp mobile DPR to max 1.6 to prevent fillrate overload on Retina screens
+          updatePixelRatio = () => {
+            if (app._renderer && canvas) {
+              const isMobile = window.innerWidth < 768 || /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
+              const targetDPR = isMobile
+                ? Math.min(window.devicePixelRatio || 1, 1.6)
+                : Math.min(window.devicePixelRatio || 1, 2.0);
+              app._renderer.setPixelRatio(targetDPR);
+              app._renderer.setSize(canvas.clientWidth, canvas.clientHeight, false);
+            }
+          };
+
+          updatePixelRatio();
+          window.addEventListener('resize', updatePixelRatio);
 
           // Fine-tune head rotation range, responsiveness, and return to neutral on leave
           try {
@@ -115,6 +133,27 @@ const HumanoidRobot = ({ className = '' }) => {
 
     loadScene();
 
+    // Viewport visibility observer to halt WebGL render loop when scrolled offscreen
+    let visibilityObserver = null;
+    if (typeof IntersectionObserver !== 'undefined' && containerRef.current) {
+      visibilityObserver = new IntersectionObserver(
+        ([entry]) => {
+          if (!appRef.current || !appRef.current._renderer) return;
+          if (entry.isIntersecting) {
+            if (appRef.current.isStopped) {
+              appRef.current.play();
+            }
+          } else {
+            if (!appRef.current.isStopped) {
+              appRef.current.stop();
+            }
+          }
+        },
+        { threshold: 0.02 }
+      );
+      visibilityObserver.observe(containerRef.current);
+    }
+
     // Mouse leave handler to smoothly return head to neutral pose
     const handleMouseLeave = () => {
       try {
@@ -140,6 +179,12 @@ const HumanoidRobot = ({ className = '' }) => {
     // Cleanup WebGL buffers, contexts and event listeners on unmount
     return () => {
       isMounted = false;
+      if (visibilityObserver) {
+        visibilityObserver.disconnect();
+      }
+      if (updatePixelRatio) {
+        window.removeEventListener('resize', updatePixelRatio);
+      }
       if (canvasEl) {
         canvasEl.removeEventListener('mouseleave', handleMouseLeave);
       }
